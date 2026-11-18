@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="Inventario.Datos/Inventario.Datos.csproj" />
+  <Project Path="Inventario.Escritorio/Inventario.Escritorio.csproj" Id="a6436665-02e0-4f63-8374-eba42a1d6260" />
+  <Project Path="Inventario.Modelos/Inventario.Modelos.csproj" />
+  <Project Path="Inventario.Servicios/Inventario.Servicios.csproj" />
+  <Project Path="Inventario/Inventario.csproj" />
+</Solution>
