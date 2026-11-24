@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="3.0">
+    <attributes>
+        <attribute name="name" value="RegistrarPrestamo"/>
+        <attribute name="authors" value="Jhonatan"/>
+        <attribute name="about" value="Registrar el prestamo de un libro - Biblioteca ADSO 3412785"/>
+        <attribute name="saved" value="2026-11-23 01:48:00 PM"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="titulo" type="String" array="False" size=""/>
+            <declare name="solicitante" type="String" array="False" size=""/>
+            <declare name="disponibles" type="Integer" array="False" size=""/>
+            <declare name="cantidadPrestar" type="Integer" array="False" size=""/>
+            <declare name="intentos" type="Integer" array="False" size=""/>
+            <declare name="maxIntentos" type="Integer" array="False" size=""/>
+            <declare name="prestamoRegistrado" type="Boolean" array="False" size=""/>
+            <assign variable="maxIntentos" expression="3"/>
+            <assign variable="intentos" expression="0"/>
+            <assign variable="cantidadPrestar" expression="0"/>
+            <assign variable="prestamoRegistrado" expression="False"/>
+            <output expression="&quot;=== REGISTRAR PRESTAMO DE LIBRO ===&quot;" newline="True"/>
+            <output expression="&quot;Titulo o codigo del libro:&quot;" newline="True"/>
+            <input variable="titulo"/>
+            <output expression="&quot;Nombre del solicitante:&quot;" newline="True"/>
+            <input variable="solicitante"/>
+            <output expression="&quot;Ejemplares disponibles:&quot;" newline="True"/>
+            <input variable="disponibles"/>
+            <while expression="disponibles &lt; 0">
+                <body>
+                    <output expression="&quot;Los ejemplares disponibles no pueden ser negativos. Ingrese de nuevo:&quot;" newline="True"/>
+                    <input variable="disponibles"/>
+                </body>
+            </while>
+            <if expression="disponibles &gt; 0">
+                <then>
+                    <output expression="&quot;Cantidad a prestar (1 a &quot; &amp; disponibles &amp; &quot;):&quot;" newline="True"/>
+                    <input variable="cantidadPrestar"/>
+                    <assign variable="intentos" expression="1"/>
+                    <while expression="(cantidadPrestar &lt;= 0 Or cantidadPrestar &gt; disponibles) And intentos &lt; maxIntentos">
+                        <body>
+                            <output expression="&quot;Cantidad invalida. Debe ser mayor que 0 y hasta &quot; &amp; disponibles &amp; &quot; (intento &quot; &amp; intentos &amp; &quot; de &quot; &amp; maxIntentos &amp; &quot;).&quot;" newline="True"/>
+                            <output expression="&quot;Ingrese nuevamente la cantidad a prestar:&quot;" newline="True"/>
+                            <input variable="cantidadPrestar"/>
+                            <assign variable="intentos" expression="intentos + 1"/>
+                        </body>
+                    </while>
+                    <if expression="cantidadPrestar &gt; 0 And cantidadPrestar &lt;= disponibles">
+                        <then>
+                            <assign variable="disponibles" expression="disponibles - cantidadPrestar"/>
+                            <assign variable="prestamoRegistrado" expression="True"/>
+                            <output expression="&quot;=== PRESTAMO REGISTRADO ===&quot;" newline="True"/>
+                            <output expression="&quot;Libro: &quot; &amp; titulo" newline="True"/>
+                            <output expression="&quot;Solicitante: &quot; &amp; solicitante" newline="True"/>
+                            <output expression="&quot;Cantidad prestada: &quot; &amp; cantidadPrestar" newline="True"/>
+                            <output expression="&quot;Ejemplares restantes: &quot; &amp; disponibles" newline="True"/>
+                        </then>
+                        <else>
+                            <output expression="&quot;=== PRESTAMO NO REGISTRADO ===&quot;" newline="True"/>
+                            <output expression="&quot;No se ingreso una cantidad valida tras &quot; &amp; maxIntentos &amp; &quot; intentos para &quot; &amp; solicitante &amp; &quot;.&quot;" newline="True"/>
+                        </else>
+                    </if>
+                </then>
+                <else>
+                    <output expression="&quot;=== PRESTAMO NO REGISTRADO ===&quot;" newline="True"/>
+                    <output expression="&quot;No hay ejemplares disponibles del libro '&quot; &amp; titulo &amp; &quot;' para &quot; &amp; solicitante &amp; &quot;.&quot;" newline="True"/>
+                </else>
+            </if>
+        </body>
+    </function>
+</flowgorithm>
